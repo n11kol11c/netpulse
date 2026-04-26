@@ -224,6 +224,19 @@ def show_history():
         print(f"  {Fore.WHITE}{i:<4} {ts:<22} {Fore.GREEN}{dl:>12} {Fore.BLUE}{ul:>12} {Fore.YELLOW}{png:>10}")
 
     print()
+    
+def clear_history():
+    """Delete the local JSON history log file and confirm removal to the user."""
+    if not os.path.exists(LOG_FILE):
+        print(Fore.YELLOW + "\n  No history file found. Nothing to delete.\n")
+        return
+
+    confirm = input(Fore.RED + "  Are you sure you want to delete all history? (y/n): ")
+    if confirm.lower() == "y":
+        os.remove(LOG_FILE)
+        print(Fore.GREEN + "  ✓ History deleted successfully.\n")
+    else:
+        print(Fore.YELLOW + "  Cancelled.\n")
 
 
 def run_full_test(save=False, ping_only=False):
@@ -273,6 +286,7 @@ def parse_args():
     parser.add_argument("--ping-only", action="store_true", help="Run only a ping/latency test")
     parser.add_argument("--history",   action="store_true", help="Show previous test results")
     parser.add_argument("--servers",   action="store_true", help="List available nearby servers")
+    parser.add_argument("--clear-history", action="store_true", help="Delete all saved test history")
     return parser.parse_args()
 
 def clear_screen():
@@ -289,6 +303,8 @@ def main():
         show_history()
     elif args.servers:
         list_servers()
+    elif args.clear_history:
+        clear_history()
     else:
         run_full_test(save=args.save, ping_only=args.ping_only)
 
