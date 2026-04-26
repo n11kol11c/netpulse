@@ -19,14 +19,21 @@ A clean, terminal-based speed test utility built in Python.
 pip install speedtest-cli colorama
 ```
 
+or
+
+```bash
+python -m pip install -r requirements.txt
+```
+
 ## Usage
 
 ```bash
-python netpulse.py              # Full speed test
-python netpulse.py --ping-only  # Ping/latency only
-python netpulse.py --save       # Run test and save to log
-python netpulse.py --history    # Show previous results
-python netpulse.py --servers    # List nearby servers
+python netpulse.py                    # Full speed test
+python netpulse.py --ping-only        # Ping/latency only
+python netpulse.py --save             # Run test and save to log
+python netpulse.py --history          # Show previous results
+python netpulse.py --servers          # List nearby servers
+python netpulse.py --clear-history    # Clear/Delete local json history
 ```
 
 ## Speed Ratings
